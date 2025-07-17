@@ -1,0 +1,9 @@
+{
+  "name": "Copy of Joycribe",
+  "description": "Joycribe - System for managing call results. Upload, analyze, and gain insights from your audio and video calls with advanced AI.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "prompt": ""
+}

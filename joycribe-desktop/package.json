@@ -1,0 +1,63 @@
+{
+  "name": "joyscribe-desktop",
+  "version": "1.0.0",
+  "description": "Transcribe local audio/video and analyze with AI.",
+  "main": "build/electron/main.js",
+  "author": "Joyscribe",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "npm run build && electron .",
+    "dev:react": "vite",
+    "dev:electron": "wait-on tcp:5173 && tsc -p electron/tsconfig.json && electron .",
+    "dev": "concurrently \"npm:dev:react\" \"npm:dev:electron\"",
+    "build:react": "vite build",
+    "build:electron": "tsc -p electron/tsconfig.json",
+    "build": "npm run build:react && npm run build:electron",
+    "package": "npm run build && electron-builder",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "@google/genai": "^1.9.0",
+    "axios": "^1.7.2",
+    "electron-store": "^8.2.0",
+    "form-data": "^4.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
+    "electron": "^30.0.6",
+    "electron-builder": "^24.13.3",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.0",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.joyscribe.desktop",
+    "productName": "Joyscribe",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist"
+    },
+    "extraResources": [
+      {
+        "from": "python-backend",
+        "to": "python-backend",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ]
+  }
+}
